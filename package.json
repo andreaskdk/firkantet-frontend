@@ -1,5 +1,5 @@
 {
-  "name": "firktantet-frontend",
+  "name": "firkantet-frontend",
   "version": "0.0.1",
   "description": "Javascript library to support the firkantet project.",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andreaskdk/firktantet-frontend.git"
+    "url": "git+https://github.com/andreaskdk/firkantet-frontend.git"
   },
   "keywords": [
     "table",
@@ -19,9 +19,9 @@
   "author": "Andreas Koch",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/andreaskdk/firktantet-frontend/issues"
+    "url": "https://github.com/andreaskdk/firkantet-frontend/issues"
   },
-  "homepage": "https://github.com/andreaskdk/firktantet-frontend#readme",
+  "homepage": "https://github.com/andreaskdk/firkantet-frontend#readme",
   "devDependencies": {
     "jest": "^26.2.1"
   },
