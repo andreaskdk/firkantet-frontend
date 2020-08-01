@@ -1,10 +1,10 @@
 {
   "name": "firkantet-frontend",
-  "version": "0.0.2",
-  "description": "Javascript library to support the firkantet project.",
+  "version": "0.0.3",
+  "description": "Javascript library to support the firkantet.org project.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --verbose ./__test__"
   },
   "repository": {
     "type": "git",
