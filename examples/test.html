@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Data sources panel</title>
+<script src="playingcards.js"></script>
+<script src="../node_modules/d3/dist/d3.js"></script>
+<script src="../index.js"></script>
+</head>
+
+<body>
+    <div id="maintablepanel" style="height: 300px;">
+
+    </div>
+
+    <div id="datasources">
+
+    </div>
+  <form name="uploadForm">
+      <label>Upload CSV file</label>
+    <div>
+      <input id="uploadInput" type="file" name="addCSVFile" >
+      
+    </div>
+    </form>
+
+    <button onclick="firkantet.expand_down()" >Down</button>
+    <button onclick="firkantet.expand_right()" >Right</button>
+</body>
+<script>
+
+
+    firkantet.create_datasources_panel();
+    firkantet.create_main_table_panel();
+    firkantet.add_small_table(playingcards.sourcename, playingcards.columns, playingcards.data);
+    firkantet.set_initial_data(["Spades"]);
+    
+</script>
+</html>
