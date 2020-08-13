@@ -1,6 +1,6 @@
 {
   "name": "firkantet-frontend",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Javascript library to support the firkantet.org project.",
   "main": "index.js",
   "scripts": {

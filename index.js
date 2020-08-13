@@ -5,7 +5,7 @@
 }(this, function (exports) {
     'use strict';
 
-    var version = "0.0.3";
+    var version = "0.0.4";
 
     var data_access = null;
     var headers = [];
