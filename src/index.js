@@ -2,7 +2,7 @@ import {DataAccess} from "./DataAccess.js"
 
 import d3 from "d3/dist/d3"
 
-export const version = "0.0.4";
+export const version = "0.0.6";
 
 var data_access = null;
 var headers = [];
