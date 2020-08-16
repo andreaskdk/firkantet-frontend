@@ -1,6 +1,8 @@
-var d3 = require("d3")
+import {DataAccess} from "./DataAccess.js"
 
-var version = "0.0.4";
+import d3 from "d3/dist/d3"
+
+export const version = "0.0.4";
 
 var data_access = null;
 var headers = [];
@@ -95,168 +97,8 @@ class ColumnSetRelation extends KeyRelation {
     }
 }
 
-class DataAccess {
 
-    constructor() {
-        this._datasources=[];
-    }
-
-    addSource(data_source) {
-        this._datasources.push(data_source);
-    }
-
-    getDataSources() {
-        return this._datasources;
-    }
-
-    getDataSourceByName(name) {
-        for(let d of data_access.getDataSources()) {
-            if(d.getName()==name) {
-                return d;
-            }
-        }
-        return null;
-    }
-
-    getNextFromSet(source_name, column_name, already_used) {
-        let col = data_access.getDataSourceByName(source_name).getColumnByName(column_name);
-        for(let val of col.getUniqueValues()) {
-            if(!already_used.includes(val)) {
-                return val;
-            }
-        }
-        return null;
-    }
-}
-
-class Datasource {
-
-    constructor(sourcename) {
-        this._active = false;
-        this._sourcename = sourcename;
-    }
-
-    getName() {
-        return this._sourcename;
-    }
-
-    setActive(active) {
-        this._active = active;
-    }
-}
-
-class SmallTable extends Datasource {
-
-    constructor(filename, column, data) {
-        super(filename);
-        this.setData(data, column)
-
-    }
-
-    getWhereKeyIs(key_column_name, key_value, target_column_name) {
-
-        let key_col=this.getColumnByName(key_column_name);
-        let target_col=this.getColumnByName(target_column_name);
-        let vals=[];
-        for(let i=0; i<key_col.getValues().length; i++) {
-
-            if(key_col.getValue(i)== key_value) {
-                vals.push(target_col.getValue(i));
-            }
-        }
-        return vals;
-    }
-
-    setData(data, columns) {
-        this._data = data;
-        if (typeof (columns[0] == "string")) {
-            this._columns = [];
-            let i=0;
-            for (let col_name of columns) {
-                this._columns.push(
-                    new DataSourceColumn(col_name, data, i)
-                )
-                i++;
-            }
-        } else {
-            this._columns = columns;
-        }
-    }
-
-    getColumns() {
-        return this._columns;
-    }
-
-    getColumn(i) {
-        return this._columns[i];
-    }
-
-    getColumnByName(name) {
-        for(let col of this._columns) {
-            if(col.getName()==name) {
-                return col;
-            }
-        }
-        return null;
-    }
-
-    numColumns() {
-        return this._columns.length;
-    }
-
-    setActive(active) {
-        super._active = active;
-    }
-
-}
-
-class DataSourceColumn {
-
-    constructor(name, dataset, col_num) {
-        this._name=name;
-        this._dataset=dataset;
-        this._col_num=col_num;
-        this._values=null;
-        this._unique_values=null;
-        this._is_full_cardinality=null;
-
-    }
-
-    getName() {
-        return this._name;
-    }
-
-    getUniqueValues() {
-        if(this._unique_values == null) {
-            this._unique_values=[...new Set(this._dataset.map(x=> x[this._col_num]))];
-        }
-        return this._unique_values;
-    }
-
-    isFullCardinality() {
-        if(this._is_full_cardinality==null) {
-            if(this.getUniqueValues().length == this._dataset.length) {
-                this._is_full_cardinality = true;
-            } else {
-                this._is_full_cardinality = false;
-            }
-        }
-        return this._is_full_cardinality;
-    }
-
-    getValues() {
-        if(this._values==null) {
-            this._values=this._dataset.map(x=> x[this._col_num]);
-        }
-        return this._values;
-    }
-
-    getValue(i) {
-        return this.getValues()[i];
-    }
-}
-
-function create_datasources_panel() {
+export function create_datasources_panel() {
 
     d3.select("#uploadInput").on("change", (d, i, nodes) => {
 
@@ -300,7 +142,7 @@ function update_source_list_panel() {
 
 }
 
-function create_main_table_panel() {
+export function create_main_table_panel() {
     key_relation = new NotFoundKeyRelation();
     data_access = new DataAccess();
     cells = [];
@@ -347,7 +189,6 @@ function draw_main_table_panel() {
             if (d.text != l[i].textContent) {
                 d.text = l[i].textContent;
                 d.user_entered = true;
-                update_key_relation();
             }
         })
         .text(d => d.text);
@@ -377,24 +218,15 @@ function find_theme() {
     return best_theme;
 }
 
-function update_key_relation() {
 
-}
-
-function add_small_table(sourcename, columns, data) {
-    var ds = new SmallTable(sourcename, columns, data);
-    ds.setActive(true);
-    data_access.addSource(ds);
-    update_source_list_panel();
-}
-
-function set_initial_data(key_data) {
+export function set_initial_data(key_data) {
     headers = [new Column("Key")];
     key_relation = new NotFoundKeyRelation();
     cells = key_data.map(x => [{ text: x, user_entered: true }]);
 
     draw_main_table_panel();
 }
+
 function next_row() {
     let next_key=null;
     if(key_relation.getType() == "ColumnSetRelation") {
@@ -470,7 +302,7 @@ function best_next_column_relation() {
     return best_column_relation;
 }
 
-function expand_right() {
+export function expand_right() {
     let col_relation=best_next_column_relation();
     if(col_relation!=null) {
         headers.push(col_relation);
@@ -482,7 +314,7 @@ function expand_right() {
     }
 }
 
-function expand_down() {
+export function expand_down() {
     if(key_relation.getType()=="NotFoundKeyRelation") {
         find_theme();
     }
@@ -501,10 +333,16 @@ function getKeyRelation() {
     return key_relation;
 }
 
-function getD3Version() {
+export function getD3Version() {
     return d3.version;
 }
 
+export function add_small_table(sourcename, columns, data) {
+    data_access.add_small_table(sourcename, columns, data);
+    update_source_list_panel();
+}
+
+/*
 exports.getD3Version = getD3Version;
 exports.version = version;
 exports.create_datasources_panel = create_datasources_panel;
@@ -519,4 +357,4 @@ exports.getDataAccess = getDataAccess;
 exports.getKeyRelation = getKeyRelation;
 
 Object.defineProperty(exports, '__esModule', { value: true });
-
+*/

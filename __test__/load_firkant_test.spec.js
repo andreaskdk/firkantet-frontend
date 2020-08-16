@@ -1,4 +1,4 @@
-var firkant = require("../src")
+var firkant = require("../dist/firkantet-frontend.js")
 
 describe("Load firkant", () => {
     test("Should be able to see version number of firkant", () => {
