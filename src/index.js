@@ -227,7 +227,7 @@ export function set_initial_data(key_data) {
     draw_main_table_panel();
 }
 
-function next_row() {
+export function next_row() {
     let next_key=null;
     if(key_relation.getType() == "ColumnSetRelation") {
         let already_used = cells.map(row => row[0].text);
@@ -325,11 +325,11 @@ export function expand_down() {
 }
 
 
-function getDataAccess() {
+export function getDataAccess() {
     return data_access;
 }
 
-function getKeyRelation() {
+export function getKeyRelation() {
     return key_relation;
 }
 
@@ -342,19 +342,3 @@ export function add_small_table(sourcename, columns, data) {
     update_source_list_panel();
 }
 
-/*
-exports.getD3Version = getD3Version;
-exports.version = version;
-exports.create_datasources_panel = create_datasources_panel;
-exports.create_main_table_panel = create_main_table_panel;
-exports.add_small_table = add_small_table;
-exports.set_initial_data = set_initial_data;
-exports.expand_down = expand_down;
-exports.expand_right = expand_right;
-
-
-exports.getDataAccess = getDataAccess;
-exports.getKeyRelation = getKeyRelation;
-
-Object.defineProperty(exports, '__esModule', { value: true });
-*/
