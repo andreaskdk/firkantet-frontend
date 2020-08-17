@@ -1,6 +1,6 @@
 {
   "name": "firkantet-frontend",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Javascript library to support the firkantet.org project.",
   "main": "dist/firkantet-frontend.js",
   "unpkg": "dist/firkantet-frontend.min.js",

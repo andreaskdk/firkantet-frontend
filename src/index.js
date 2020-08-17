@@ -2,7 +2,7 @@ import {DataAccess} from "./DataAccess.js"
 
 import d3 from "d3/dist/d3"
 
-export const version = "0.0.7";
+export const version = "0.0.8";
 
 var data_access = null;
 var headers = [];
@@ -22,7 +22,7 @@ class Column {
     }
 
     getType() {
-        return this.constructor.name;
+        return "Column";
     }
 }
 
@@ -35,6 +35,10 @@ class CtCColumn extends Column {
         this._operator=operator;
         this._key_full_cardinality=key_full_cardinality;
         this._one_to_one=one_to_one;
+    }
+
+    getType() {
+        return "CtCColumn";
     }
 
     getKeyFullCardinality() {
@@ -63,13 +67,17 @@ class KeyRelation {
     }
 
     getType() {
-        return this.constructor.name;
+        return "KeyRelation";
     }
 }
 
 class NotFoundKeyRelation extends KeyRelation {
     constructor() {
         super();
+    }
+
+    getType() {
+        return "NotFoundKeyRelation";
     }
 }
 
@@ -78,6 +86,10 @@ class ColumnSetRelation extends KeyRelation {
         super();
         this._data_source=data_source;
         this._column=column;
+    }
+
+    getType() {
+        return "ColumnSetRelation";
     }
 
     getDataSource() {
