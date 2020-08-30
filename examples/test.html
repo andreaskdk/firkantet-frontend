@@ -5,7 +5,36 @@
 <title>Data sources panel</title>
 <script src="playingcards.js"></script>
 <script src="../node_modules/d3/dist/d3.js"></script>
-<script src="../dist/firkantet-frontend.min.js"></script>
+<script src="../dist/firkantet-frontend.js"></script>
+<style>
+
+:root {
+       --sans-serif:"avenir next",avenir,helvetica,"helvetica neue",ubuntu,roboto,noto,"segoe ui",arial,sans-serif}
+
+    body {
+        margin: 0 14px;
+        font-family: "Source Serif Pro",Iowan Old Style,Apple Garamond,Palatino Linotype,Times New Roman,"Droid Serif",Times,serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+        font-size: 17px;
+        line-height: 1.5;
+        color: #1b1e23
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: var(--sans-serif);
+        font-size: 14px;
+    }
+
+    th {
+        text-align: left
+    }
+
+    thead tr {
+        border-bottom: 1px solid #ccc
+    }
+
+</style>
 </head>
 
 <body>
@@ -24,8 +53,7 @@
     </div>
     </form>
 
-    <button onclick="firkantet.expand_down()" >Down</button>
-    <button onclick="firkantet.expand_right()" >Right</button>
+  
 </body>
 <script>
 

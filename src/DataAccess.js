@@ -36,6 +36,7 @@ export class DataAccess {
         var ds = new SmallTable(sourcename, columns, data);
         ds.setActive(true);
         this.addSource(ds);
+        return ds;
     }
 }
 
@@ -79,7 +80,7 @@ class SmallTable extends Datasource {
 
     setData(data, columns) {
         this._data = data;
-        if (typeof (columns[0] == "string")) {
+        if (columns != null && typeof (columns[0] == "string")) {
             this._columns = [];
             let i=0;
             for (let col_name of columns) {

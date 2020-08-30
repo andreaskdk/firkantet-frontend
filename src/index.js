@@ -119,7 +119,7 @@ export function create_datasources_panel() {
         }
 
         let file = nodes[0].files[0];
-        var ds = new SmallTable(file.name, null, null);
+        var ds = data_access.add_small_table(file.name, null, null);
 
         data_access.addSource(ds);
         update_source_list_panel();
@@ -173,7 +173,34 @@ function draw_main_table_panel() {
     main_table_panel.append("div").attr("id", "constraint_div").text("Constraint");
     main_table_panel.append("div").attr("id", "sort_order_div").text("Sort order");
 
-    var table = main_table_panel.append("div").attr("id", "main_data_table").append("table");
+    var table_container = main_table_panel.append("div")
+        .attr("id", "main_table_container")
+        .style("display", "flex");
+    var table = table_container.append("div").attr("id", "main_data_table").append("table");
+    table_container.append("svg")
+        .attr("id", "expand_right_button")
+        .attr("width", 40)
+        .attr("height", 40)
+        .on("mouseover", () => {
+            d3.select("#expand_right_button")
+                .selectAll("path")
+                .attr("stroke-width", 5)
+        })
+        .on("mouseout", () => {
+            d3.select("#expand_right_button")
+                .selectAll("path")
+                .attr("stroke-width", 3)
+        })
+        .on("click", expand_right)
+        .append("path")
+        .attr("d", "M12.5 2L28 20L12.5 38")
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 3)
+        .attr("stroke-linecap", "round")
+        .attr("stroke-linejoin", "round")
+        .attr("fill", "none")
+        ;
+
 
     table.append("thead").append("tr")
         .selectAll(".table_header")
@@ -205,6 +232,29 @@ function draw_main_table_panel() {
         })
         .text(d => d.text);
 
+        main_table_panel.append("svg")
+        .attr("id", "expand_down_button")
+        .attr("width", 40)
+        .attr("height", 40)
+        .on("mouseover", () => {
+            d3.select("#expand_down_button")
+                .selectAll("path")
+                .attr("stroke-width", 5)
+        })
+        .on("mouseout", () => {
+            d3.select("#expand_down_button")
+                .selectAll("path")
+                .attr("stroke-width", 3)
+        })
+        .on("click", expand_down)
+        .append("path")
+        .attr("d", "M2 12.5L20 28L38 12.5")
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 3)
+        .attr("stroke-linecap", "round")
+        .attr("stroke-linejoin", "round")
+        .attr("fill", "none")
+        ;
 
 }
 
